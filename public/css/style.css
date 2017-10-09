@@ -1,9 +1,11 @@
-body, select, label, legend, button, .button, input[type="button"], input[type="text"], input[type="email"], input[type="password"], input[type="reset"], input[type="submit"] {
+body, label, legend, button, .button, select, textarea,
+input[type="button"], input[type="text"], input[type="email"], input[type="password"], input[type="reset"], input[type="submit"] {
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 
-body, select, label, legend, button, .button, input[type="button"], input[type="text"], input[type="email"], input[type="password"], input[type="reset"], input[type="submit"] {
-    font-weight: 300;
+#content {
+    font-family: 'Manuale', serif;
 }
 
 #navigation {
