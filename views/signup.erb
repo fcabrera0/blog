@@ -1,0 +1,25 @@
+<div id="account" class="row">
+  <div class="column">
+    <form id="signup" method="post" onsubmit="signup(); return false;">
+      <h2>Registro</h2>
+      <label>Email</label>
+      <input name="email" type="email" required>
+      <label>Contraseña</label>
+      <input name="password" type="password" required>
+      <label><input type="checkbox" required> He leído y acepto los <a href="#">términos y condiciones de uso</a>.</label>
+      <button class="block">Crear usuario</button>
+      <a class="button block" href="/login">Ya tengo una cuenta</a>
+    </form>
+  </div>
+</div>
+<script>
+  function signup() {
+    formData = document.getElementById('signup')
+    $.post('/auth/new', {
+      email: formData.email.value,
+      password: formData.password.value
+    }, function(data) {
+      data = JSON.parse(data)
+    })
+  }
+</script>
