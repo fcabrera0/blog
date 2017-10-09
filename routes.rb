@@ -5,8 +5,12 @@ require_relative 'models'
 set :port, 3000
 
 before do
-  @session = Session.where(id: BSON::ObjectId.from_string(cookies['session'])).first
-  @user = @session.user
+  begin
+    @session = Session.find(cookies['session'])
+    @user = @session.user
+  rescue Mongoid::Errors::InvalidFind
+    @session = @user = nil
+  end
 end
 
 # Home
