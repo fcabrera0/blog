@@ -4,12 +4,13 @@ input[type="button"], input[type="text"], input[type="email"], input[type="passw
     font-weight: 300;
 }
 
-#content {
-    font-family: 'Manuale', serif;
+#header {
+    font-family: 'Open Sans', serif;
 }
 
 #navigation {
-    border-bottom: .1rem solid #d1d1d1;
+    font-size: 14px;
+    /*border-bottom: .1rem solid #B71C1C;*/
     width: 100%;
     max-width: 100%;
     height: 7rem;
@@ -22,12 +23,26 @@ input[type="button"], input[type="text"], input[type="email"], input[type="passw
     margin: 0 0.35rem;
 }
 
+a {
+    color: #B71C1C;
+}
+
 #view {
     padding-top: 10rem;
 }
 
 .container {
-    max-width: 80rem;
+    max-width: 120rem;
+}
+
+button, .button {
+    background-color: #B71C1C;
+    border-color: #B71C1C;
+}
+
+button.button-outline,
+.button.button-outline {
+    color: #B71C1C;
 }
 
 .block {

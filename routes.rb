@@ -29,13 +29,13 @@ get '/contacto' do
 end
 
 # Login page
-get '/login' do
+get '/admin/login' do
   @title = 'Login'
   erb :login
 end
 
 # Signup
-get '/signup' do
+get '/admin/signup' do
   @title = 'Signup'
   erb :signup
 end
