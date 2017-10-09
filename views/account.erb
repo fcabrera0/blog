@@ -1,0 +1,61 @@
+<div id="account" class="row">
+  <div v-if="type" class="column">
+    <form id="signup" method="post" onsubmit="app.signup(); return false;">
+      <h2>Register</h2>
+      <label>Email</label>
+      <input v-model="email" type="email" required>
+      <label>Password</label>
+      <input v-model="password" type="password" required>
+      <button class="block">Signup</button>
+      <a href="#" @click="type = !type">Login</a>
+    </form>
+  </div>
+  <div v-else class="column">
+    <form id="login" method="post" onsubmit="app.login(); return false;">
+      <h2>Login</h2>
+      <label>Email</label>
+      <input v-model="email" type="email" required>
+      <label>Password</label>
+      <input v-model="password" type="password" required>
+      <button class="block">Login</button>
+      <a href="#" @click="type = !type">Signup</a>
+    </form>
+  </div>
+</div>
+<script>
+  var app = new Vue({
+    el: '#account',
+    data: {
+      type: false,
+      loginData: {
+        email: null,
+        password: null
+      },
+      signupData: {
+        email: null,
+        password: null
+      }
+    },
+    methods: {
+      login: function() {
+        $.post('/auth/open', {
+          email: this.loginData.email.value,
+          password: this.loginData.password.value
+        }, this.loginResponse)
+      },
+      loginResponse: function (data) {
+        data = JSON.parse(data)
+
+      },
+      signup: function() {
+        $.post('/auth/open', {
+          email: this.signupData.email.value,
+          password: this.signupData.password.value
+        }, this.signupResponse)
+      },
+      signupResponse: function (data) {
+        data = JSON.parse(data)
+      }
+    }
+  })
+</script>
