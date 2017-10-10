@@ -1,51 +1,14 @@
-body, label, legend, button, .button, select, textarea,
-input[type="button"], input[type="text"], input[type="email"], input[type="password"], input[type="reset"], input[type="submit"] {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+body {
+    font-family: 'Montserrat', serif;
+    font-size: 0.8rem;
+    font-weight: 200;
 }
 
-#header {
-    font-family: 'Open Sans', serif;
+.btn {
+    font-size: inherit;
+    font-weight: inherit;
 }
 
-#navigation {
-    font-size: 14px;
-    /*border-bottom: .1rem solid #B71C1C;*/
-    width: 100%;
-    max-width: 100%;
-    height: 7rem;
-    position: fixed;
-    z-index: 1;
-}
-
-#navigation a {
-    line-height: 7rem;
-    margin: 0 0.35rem;
-}
-
-a {
-    color: #B71C1C;
-}
-
-#view {
-    padding-top: 10rem;
-}
-
-.container {
-    max-width: 120rem;
-}
-
-button, .button {
-    background-color: #B71C1C;
-    border-color: #B71C1C;
-}
-
-button.button-outline,
-.button.button-outline {
-    color: #B71C1C;
-}
-
-.block {
-    width: 100%;
-    min-width: 100%;
+.wrapper {
+    padding-top: 3.2rem;
 }
