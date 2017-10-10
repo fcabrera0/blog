@@ -37,9 +37,27 @@ class Post
   belongs_to :user
 end
 
+class Media
+  include Mongoid::Document
+
+  field :mime, type: String
+  field :file, type: String
+  field :descr, type: String
+  field :timestamp, type: DateTime, default: ->{ DateTime.now }
+end
+
 class Comment
   include Mongoid::Document
+
   field :content, type: String
   field :timestamp, type: DateTime, default: ->{ DateTime.now }
+
   belongs_to :user
+end
+
+class Contact
+  include Mongoid::Document
+
+  field :email, type: String
+  field :subject, type: String
 end

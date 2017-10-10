@@ -30,17 +30,21 @@ end
 
 # Login page
 get '/admin/login' do
-  @title = 'Login'
+  @title = 'Ingreso'
   erb :login
 end
 
 # Signup
 get '/admin/signup' do
-  @title = 'Signup'
+  @title = 'Registro'
   erb :signup
 end
 
-get '/post/:id' do
+get '/admin/dashboard' do
+  @title = 'Dashboard'
+end
+
+get '/post' do
   begin
     @post = Post.find(params[:id])
     @title = @post.title
@@ -49,6 +53,22 @@ get '/post/:id' do
     @title = 'Publicación no encontrada'
   end
   erb :post
+end
+
+get '/post/edit' do
+  begin
+    @post = Post.find(params[:id])
+    @title = @post.title
+  rescue Mongoid::Errors::DocumentNotFound
+    @post = nil
+    @title = 'Publicación no encontrada'
+  end
+  erb :edit
+end
+
+get '/post/new' do
+  @title = 'Nueva publicación'
+  erb :compose
 end
 
 # Signup
