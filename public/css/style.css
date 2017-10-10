@@ -1,13 +1,32 @@
 body {
     font-family: 'Montserrat', serif;
     font-size: 0.8em;
+    font-weight: 400;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+.navbar-brand, a {
+    color: #c0392b !important;
+}
+
+.form-control {
+    font-size: 14px;
     font-weight: 200;
 }
 
-.btn.btn-neutral {
+.form-control:focus {
+    border-color: #c0392b;
+    outline: 0
+}
+
+/*
+.nav-link.btn {
     background-color: #fff;
     color: #f96332;
 }
+*/
 
 .btn, .nav-link {
     margin: 5px 1px;
@@ -19,6 +38,11 @@ body {
     font-weight: inherit;
     border-radius: 0.1875rem;
     cursor: pointer;
+}
+
+.btn.btn-primary {
+    border-color: #c0392b;
+    background-color: #c0392b;
 }
 
 .wrapper {
