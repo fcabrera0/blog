@@ -5,8 +5,9 @@ class User
 
   field :email, type: String
   field :name, type: String
-  field :role, type: Array, default: ['reader']
   field :password, type: Hash
+  field :role, type: Array, default: ['reader']
+  field :status, type: Integer, default: 0
   field :timestamp, type: DateTime, default: ->{ DateTime.now }
 
   has_many :sessions

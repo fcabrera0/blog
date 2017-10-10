@@ -1,14 +1,26 @@
 body {
     font-family: 'Montserrat', serif;
-    font-size: 0.8rem;
+    font-size: 0.8em;
     font-weight: 200;
+}
+
+.btn.btn-neutral {
+    background-color: #fff;
+    color: #f96332;
+}
+
+.btn, .nav-link {
+    margin: 5px 1px;
+    padding: 11px 22px;
 }
 
 .btn {
     font-size: inherit;
     font-weight: inherit;
+    border-radius: 0.1875rem;
+    cursor: pointer;
 }
 
 .wrapper {
-    padding-top: 3.2rem;
+    padding-top: 4.1rem;
 }
