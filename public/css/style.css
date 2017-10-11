@@ -4,7 +4,7 @@ body {
     font-weight: 400;
 }
 
-.content {
+.subtitle, .content {
     font-family: 'Open Sans', serif;
     font-weight: 300;
 }
@@ -12,8 +12,9 @@ body {
 .navbar-brand, .title {
     font-weight: 700;
 }
-.navbar-brand, a, .title {
-    color: #c0392b !important;
+
+.navbar-brand, a.nav-link, .title, .subtitle {
+    color: #eee !important;
 }
 
 .form-control {
@@ -24,6 +25,10 @@ body {
 .form-control:focus {
     border-color: #c0392b;
     outline: 0
+}
+
+a, a:hover {
+    color: #c0392b;
 }
 
 /*
@@ -46,10 +51,26 @@ body {
 }
 
 .btn.btn-primary {
+    color: #fff;
     border-color: #c0392b;
     background-color: #c0392b;
 }
 
+.btn.btn-neutral {
+    color: #c0392b !important;
+    border-color: #fff;
+    background-color: #fff;
+}
+
+html, body, .wrapper, .container, .content-container {
+    height: 100%;
+}
+
 .wrapper {
     padding-top: 4.1rem;
+}
+
+.content-container {
+    padding-top: 4em;
+    background-color: #fff;
 }
