@@ -62,15 +62,39 @@ a, a:hover {
     background-color: #fff;
 }
 
-html, body, .wrapper, .container, .content-container {
+html, body, .container {
     height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.wrapper .header {
+    flex: 0 1 auto;
+}
+
+.wrapper .content {
+    flex: 1 1 auto;
+}
+
+@media (max-width: 992px) {
+    .container {
+        padding: 0;
+    }
+
+    .content {
+        padding: 1em;
+    }
 }
 
 .wrapper {
     padding-top: 4.1rem;
 }
 
-.content-container {
+.content {
     padding-top: 4em;
     background-color: #fff;
 }
