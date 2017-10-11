@@ -98,3 +98,7 @@ html, body, .container {
     padding-top: 4em;
     background-color: #fff;
 }
+
+.content h1 {
+    margin-bottom: 1em;
+}
