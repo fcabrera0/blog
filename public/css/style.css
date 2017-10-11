@@ -4,10 +4,15 @@ body {
     font-weight: 400;
 }
 
-.navbar-brand {
+.content {
+    font-family: 'Open Sans', serif;
+    font-weight: 300;
+}
+
+.navbar-brand, .title {
     font-weight: 700;
 }
-.navbar-brand, a {
+.navbar-brand, a, .title {
     color: #c0392b !important;
 }
 

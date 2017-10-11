@@ -44,29 +44,36 @@ get '/admin/dashboard' do
   @title = 'Dashboard'
 end
 
+# Get a post
 get '/post' do
   begin
     @post = Post.find(params[:id])
     @title = @post.title
-  rescue Mongoid::Errors::DocumentNotFound
+  rescue Mongoid::Errors::DocumentNotFound, Mongoid::Errors::InvalidFind
     @post = nil
     @title = 'Publicación no encontrada'
   end
   erb :post
 end
 
+# Edit a post
 get '/post/edit' do
+  redirect "/login?r=#{request.fullpath}" if @user.blank?
+
   begin
     @post = Post.find(params[:id])
     @title = @post.title
-  rescue Mongoid::Errors::DocumentNotFound
+  rescue Mongoid::Errors::DocumentNotFound, Mongoid::Errors::InvalidFind
     @post = nil
     @title = 'Publicación no encontrada'
   end
   erb :edit
 end
 
+# Compose a post
 get '/post/new' do
+  redirect "/login?r=#{request.fullpath}" if @user.blank?
+
   @title = 'Nueva publicación'
   erb :compose
 end
