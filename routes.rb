@@ -58,7 +58,7 @@ end
 
 # Edit a post
 get '/post/edit' do
-  redirect "/login?r=#{request.fullpath}" if @user.blank?
+  redirect "/admin/login?r=#{request.fullpath}" if @user.blank?
 
   begin
     @post = Post.find(params[:id])
@@ -72,7 +72,7 @@ end
 
 # Compose a post
 get '/post/new' do
-  redirect "/login?r=#{request.fullpath}" if @user.blank?
+  redirect "/admin/login?r=#{request.fullpath}" if @user.blank?
 
   @title = 'Nueva publicación'
   erb :compose

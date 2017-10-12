@@ -1,19 +1,17 @@
-<div class="header">
-  <div class="jumbotron jumbotron-fluid text-center" style="background-color: transparent;">
-    <h1 class="title">Registro</h1>
-  </div>
-</div>
 <div class="content">
   <div class="row justify-content-center">
     <div class="col-md-5">
-      <form method="post" onsubmit="return false;">
+      <form id="signup-form" method="post" onsubmit="signup(); return false;">
+        <div class="text-center">
+          <h1 class="title">Registro</h1>
+        </div>
         <div class="form-group">
           <label>Email</label>
-          <input class="form-control" type="email" required>
+          <input name="email" class="form-control" type="email" required>
         </div>
         <div class="form-group">
           <label>Contraseña</label>
-          <input class="form-control" type="password" required>
+          <input name="password" class="form-control" type="password" required>
         </div>
         <div class="form-group">
           <label><input type="checkbox" class="checkbox"> He leído y acepto los <a href="#">términos y condiciones del servicio</a>.</label>
@@ -28,3 +26,20 @@
     </div>
   </div>
 </div>
+<script>
+  function signup() {
+    var form = document.getElementById('signup-form')
+    $.post('/auth/new', {
+      email: form.email.value,
+      password: form.password.value
+    }, function (data) {
+      data = JSON.parse(data)
+      if(data.success === 1) {
+
+      }
+      else {
+
+      }
+    })
+  }
+</script>

@@ -4,7 +4,12 @@ body {
     font-weight: 400;
 }
 
-.subtitle, .content {
+.content {
+    padding-top: 4em;
+    background-color: #fff;
+}
+
+.subtitle, .form-control {
     font-family: 'Open Sans', serif;
     font-weight: 300;
 }
@@ -13,7 +18,8 @@ body {
     font-weight: 700;
 }
 
-.navbar-brand, a.nav-link, .title, .subtitle {
+.navbar-brand, .nav-link, .title, .subtitle {
+    font-family: inherit;
     color: #eee !important;
 }
 
@@ -94,11 +100,8 @@ html, body, .container {
     padding-top: 4.1rem;
 }
 
-.content {
-    padding-top: 4em;
-    background-color: #fff;
-}
-
 .content h1 {
+    font-family: 'Montserrat', serif;
     margin-bottom: 1em;
+    color: #212529 !important;
 }
