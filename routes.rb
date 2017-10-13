@@ -28,9 +28,23 @@ get '/contacto' do
   erb :contact
 end
 
+post '/contacto' do
+  [:name, :email, :subject, :content].each do |e|
+    return {:success=>0, :code=>1}.to_json unless params.include? e
+  end
+  Contact.create(
+      name: params[:name],
+      email: params[:email],
+      subject: params[:subject],
+      content: params[:content]
+  )
+  redirect '/'
+end
+
 # Login page
 get '/admin/login' do
   @title = 'Ingreso'
+  @r = params[:r] || '/'
   erb :login
 end
 
@@ -83,7 +97,7 @@ post '/auth/new' do
   [:email, :password].each do |e|
     return {:success=>0, :code=>1}.to_json unless params.include? e
   end
-  return {:success=>0, :code=>2}.to_json if User.where(:email=>params[:email]).exists
+  return {:success=>0, :code=>2}.to_json if User.where(:email=>params[:email]).exists?
 
   salt = SecureRandom.base64
   value = Digest::SHA2.new(512).hexdigest(params[:password] + salt)
@@ -101,7 +115,7 @@ post '/auth/open' do
   [:email, :password].each do |e|
     return {:success=>0, :code=>1}.to_json unless params.include? e
   end
-  return {:success=>0, :code=>2}.to_json unless User.where(:email=>params[:email]).exists
+  return {:success=>0, :code=>2}.to_json unless User.where(:email=>params[:email]).exists?
 
   user = User.where(email: params[:email]).first
   salt = user.password[:salt]
