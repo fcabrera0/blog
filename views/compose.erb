@@ -1,28 +1,50 @@
 <div class="content">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form onsubmit="return false;">
+      <form id="post" method="post" action="javascript:void(0)" onsubmit="post(); return false;">
         <div class="text-center">
           <h1 class="title">Nueva publicación</h1>
         </div>
         <div class="form-group">
           <label>Título</label>
-          <input class="form-control" type="text">
+          <input name="title" class="form-control" type="text" required>
         </div>
         <div class="form-group">
           <label>Contenido</label>
-          <textarea class="form-control" style="height: 10em;" required></textarea>
+          <textarea name="content" class="form-control" style="height: 10em;" required></textarea>
         </div>
         <div class="form-group">
-          <label><input type="checkbox" class="checkbox"> He leído y acepto las <a href="#">normas de la comunidad</a>.</label>
+          <label>Tags</label>
+          <input name="tags" class="form-control" type="text" required>
+          <small>Separados por comas</small>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" class="checkbox" required> He leído y acepto las <a href="#">normas de la comunidad</a>.</label>
         </div>
         <div class="text-center">
           <button class="btn btn-primary">Publicar</button>
         </div>
         <div class="text-center">
-          <a href="#" class="btn btn-default">Preview</a>
+          <a href="javascript:void(0)" onclick="preview()" class="btn btn-default">Previsualizar</a>
         </div>
       </form>
     </div>
   </div>
 </div>
+<script>
+  function post() {
+    var form = document.getElementById('post')
+    $.post('/post', {
+      title: form.title.value,
+      content: form.content.value,
+      tags: form.tags.value.split(', ').map(e => $.trim(e))
+    }, function (data) {
+      data = JSON.parse(data)
+      console.log(data)
+    })
+  }
+  
+  function preview() {
+
+  }
+</script>

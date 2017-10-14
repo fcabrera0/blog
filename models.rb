@@ -21,6 +21,7 @@ class Session
   include Mongoid::Document
 
   field :ip, type: String
+  field :status, type: Integer, default: 0
   field :timestamp, type: DateTime, default: ->{ DateTime.now }
 
   belongs_to :user
@@ -32,6 +33,8 @@ class Post
   field :title, type: String
   field :content, type: String
   field :tags, type: Array
+  field :views, type: Integer, default: 0
+  field :status, type: Integer, default: 0
   field :timestamp, type: DateTime, default: ->{ DateTime.now }
 
   belongs_to :user
@@ -50,6 +53,7 @@ class Comment
   include Mongoid::Document
 
   field :content, type: String
+  field :status, type: Integer, default: 0
   field :timestamp, type: DateTime, default: ->{ DateTime.now }
 
   belongs_to :user

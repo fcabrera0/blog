@@ -20,6 +20,7 @@ end
 # Home
 get '/' do
   @title = 'Inicio'
+  @posts = Post.where(:status.gte => 0)
   erb :home
 end
 
@@ -55,7 +56,10 @@ get '/admin/signup' do
 end
 
 get '/admin/dashboard' do
+  redirect "/admin/login?r=#{request.fullpath}" if @user.blank?
+  @posts = @user.posts
   @title = 'Dashboard'
+  erb :dashboard
 end
 
 # Get a post
@@ -63,11 +67,31 @@ get '/post' do
   begin
     @post = Post.find(params[:id])
     @title = @post.title
+    @by = @post.user
+    @post.views += 1
+    @post.save
   rescue Mongoid::Errors::DocumentNotFound, Mongoid::Errors::InvalidFind
     @post = nil
     @title = 'Publicación no encontrada'
   end
   erb :post
+end
+
+post '/post' do
+  [:title, :content, :tags].each do |e|
+    return {:success=>0, :code=>1}.to_json unless params.include? e
+  end
+  return {:success=>0, :code=>2}.to_json if @user.blank? or not @user.role.include? 'creator'
+
+  p = @user.posts.build(
+      title: params[:title],
+      content: params[:content],
+      tags: params[:tags]
+  )
+
+  @user.save
+
+  return {:success=>1, :id=>p.id.to_s}.to_json
 end
 
 # Edit a post
