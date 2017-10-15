@@ -70,6 +70,10 @@ get '/admin/dashboard' do
   erb :dashboard
 end
 
+get '/post/parse' do
+  @mdparser.render params[:text]
+end
+
 # Get a post
 get '/post' do
   begin
@@ -83,13 +87,6 @@ get '/post' do
     @title = 'Publicación no encontrada'
   end
   erb :post
-end
-
-get '/preview' do
-  @title = params[:title]
-  @brief = params[:brief]
-  @content = params[:content]
-  erb :preview
 end
 
 post '/post' do
@@ -111,20 +108,16 @@ post '/post' do
 end
 
 post '/post/edit' do
-  [:id, :title, :brief, :content, :tags].each do |e|
-    return {:success=>0, :code=>1}.to_json unless params.include? e
-  end
-
-  return {:success=>0, :code=>2}.to_json if @user.blank? or not @user.role.include? 'creator'
+  return {:success=>0, :code=>1}.to_json if @user.blank? or not @user.role.include? 'creator'
 
   @post = Post.find(params[:id])
 
-  return {:success=>0, :code=>3}.to_json if @user.id.to_s != @post.user.id.to_s
+  return {:success=>0, :code=>2}.to_json if @user.id.to_s != @post.user.id.to_s
 
-  @post.title = params[:title]
-  @post.brief = params[:brief]
-  @post.tags = params[:tags]
-  @post.content = params[:content]
+  @post.title = params[:title] || @post.title
+  @post.brief = params[:brief] || @post.brief
+  @post.tags = params[:tags] || @post.tags
+  @post.content = params[:content] || @post.content
   @post.save
 
   {:success=>1, :id=>@post.id.to_s}.to_json
@@ -136,7 +129,7 @@ get '/post/edit' do
 
   begin
     @post = Post.find(params[:id])
-    @title = @post.title
+    @title = 'Editar publicación'
     @by = @post.user
   rescue Mongoid::Errors::DocumentNotFound, Mongoid::Errors::InvalidFind
     @post = nil

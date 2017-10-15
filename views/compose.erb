@@ -33,9 +33,6 @@
     <div class="text-center">
       <button class="btn btn-primary">Publicar</button>
     </div>
-    <div class="text-center">
-      <a href="javascript:void(0)" onclick="preview()" class="btn btn-default">Previsualizar</a>
-    </div>
   </form>
 </div>
 <script>
@@ -50,11 +47,5 @@
       data = JSON.parse(data)
       console.log(data)
     })
-  }
-  
-  function preview() {
-    var form = document.getElementById('post')
-    var w = window.open(`/preview?title=${form.title.value}&brief=${form.brief.value}&content=${form.content.value}`, '_blank')
-    w.focus()
   }
 </script>

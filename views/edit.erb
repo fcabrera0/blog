@@ -2,39 +2,24 @@
   <div class="text-center">
     <h1 class="title">Editar</h1>
   </div>
+  <% unless @post.blank? %>
   <form id="post" method="post" action="javascript:void(0)" onsubmit="save(); return false;">
     <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label>Título</label>
-          <input name="title" class="form-control" type="text" value="<%= @post.title %>" required>
-        </div>
-        <div class="form-group">
-          <label>Descripción</label>
-          <textarea name="brief" class="form-control" style="height: 8em;" required><%= @post.brief %></textarea>
-        </div>
-        <div class="form-group">
-          <label>Tags</label>
-          <input name="tags" class="form-control" value="<%= @post.tags.join ', ' %>" type="text" required>
-          <small>Separados por comas</small>
-        </div>
-      </div>
       <div class="col-md-6">
         <div class="form-group">
           <label>Contenido</label>
           <textarea name="content" class="form-control content-editor" required><%= @post.content %></textarea>
         </div>
       </div>
-    </div>
+      <div class="col-md-6">
+        <div id="preview">
 
-    <div class="form-group text-center">
-      <label><input type="checkbox" class="checkbox" required> He leído y acepto las <a href="#">normas de la comunidad</a>.</label>
+        </div>
+      </div>
     </div>
+    <% end %>
     <div class="text-center">
       <button class="btn btn-primary">Guardar</button>
-    </div>
-    <div class="text-center">
-      <a href="javascript:void(0)" onclick="preview()" class="btn btn-default">Previsualizar</a>
     </div>
   </form>
 </div>
@@ -43,9 +28,6 @@
     var form = document.getElementById('post')
     $.post('/post/edit', {
       id: '<%= @post.id.to_s %>',
-      title: form.title.value,
-      brief: form.brief.value,
-      tags: form.tags.value.split(', ').map(e => $.trim(e)),
       content: form.content.value
     }, function(data) {
       data = JSON.parse(data)
@@ -54,7 +36,13 @@
 
   function preview() {
     var form = document.getElementById('post')
-    var w = window.open(`/preview?title=${form.title.value}&brief=${form.brief.value}&content=${form.content.value}`, '_blank')
-    w.focus()
+    $.get('/post/parse', {
+      text: form.content.value
+    }, function(data) {
+      $('#preview').html(data)
+    })
+    setTimeout(preview, 2000)
   }
+
+  window.onload = function() { preview() }
 </script>

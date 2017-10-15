@@ -31,6 +31,7 @@ class Post
   include Mongoid::Document
 
   field :title, type: String
+  field :visibility, type: Integer
   field :brief, type: String
   field :content, type: String
   field :tags, type: Array
