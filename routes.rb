@@ -98,7 +98,7 @@ post '/post' do
   end
   return {:success=>0, :code=>2}.to_json if @user.blank? or not @user.role.include? 'creator'
 
-  p = @user.posts.build(
+  @post = @user.posts.build(
       title: params[:title],
       brief: params[:brief],
       content: params[:content],
@@ -107,7 +107,25 @@ post '/post' do
 
   @user.save
 
-  return {:success=>1, :id=>p.id.to_s}.to_json
+  return {:success=>1, :id=>@post.id.to_s}.to_json
+end
+
+post '/post/edit' do
+  [:id, :title, :brief, :content, :tags].each do |e|
+    return {:success=>0, :code=>1}.to_json unless params.include? e
+  end
+
+  return {:success=>0, :code=>2}.to_json if @user.blank? or not @user.role.include? 'creator'
+  return {:success=>0, :code=>3}.to_json if @user.id.to_s != @post.user.id.to_s
+
+  @post = Post.find(params[:id])
+  @post.title = params[:title]
+  @post.brief = params[:brief]
+  @post.tags = params[:tags]
+  @post.content = params[:content]
+  @post.save
+
+  {:success=>1, :id=>@post.id.to_s}.to_json
 end
 
 # Edit a post
@@ -117,6 +135,7 @@ get '/post/edit' do
   begin
     @post = Post.find(params[:id])
     @title = @post.title
+    @by = @post.user
   rescue Mongoid::Errors::DocumentNotFound, Mongoid::Errors::InvalidFind
     @post = nil
     @title = 'Publicación no encontrada'
