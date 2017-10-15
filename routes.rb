@@ -10,7 +10,9 @@ Mongoid.load!('mongoid.yml', :production)
 set :port, 3000
 
 class MdRenderer < Redcarpet::Render::HTML
-
+  def link(link, title, content)
+    "<a target=\"_blank\" href=\"#{link}\">#{content}</a>"
+  end
 end
 
 before do
