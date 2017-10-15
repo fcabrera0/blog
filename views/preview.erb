@@ -1,17 +1,13 @@
 <div class="header">
   <div class="jumbotron jumbotron-fluid text-center" style="background-color: transparent;">
     <h1 class="title"><%= @title %></h1>
-    <p class="subtitle"><%= @post.brief %></p>
+    <p class="subtitle"><%= @brief %></p>
   </div>
 </div>
 <div class="content post-body">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <% unless @post.blank? %>
-          <%= @mdparser.render @post.content %>
-      <% else %>
-
-      <% end %>
+      <%= @mdparser.render @content %>
     </div>
   </div>
 </div>

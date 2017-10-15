@@ -6,7 +6,6 @@
 </div>
 <div class="content">
   <% @posts.each do |p| %>
-  <h5><a href="/post?id=<%= p.id.to_s %>"><%= p.title %></a></h5>
-  <p><%= p.content %></p>
+      <h5><a href="/post?id=<%= p.id.to_s %>"><%= p.title %></a></h5>
   <% end %>
 </div>

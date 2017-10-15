@@ -44,6 +44,11 @@ a, a:hover {
     border-color: #c0392b;
 }
 
+.content-editor {
+    height: 20em;
+    font-family: monospace;
+}
+
 /*
 .nav-link.btn {
     background-color: #fff;

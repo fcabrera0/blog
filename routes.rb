@@ -3,12 +3,18 @@ require 'sinatra/cookies'
 require 'mongoid'
 require 'base64'
 require 'digest'
+require 'redcarpet'
 require_relative 'models'
 
 Mongoid.load!('mongoid.yml', :production)
 set :port, 3000
 
+class MdRenderer < Redcarpet::Render::HTML
+
+end
+
 before do
+  @mdparser = Redcarpet::Markdown.new(MdRenderer)
   begin
     @session = Session.find(cookies['session'])
     @user = @session.user
@@ -77,14 +83,22 @@ get '/post' do
   erb :post
 end
 
+get '/preview' do
+  @title = params[:title]
+  @brief = params[:brief]
+  @content = params[:content]
+  erb :preview
+end
+
 post '/post' do
-  [:title, :content, :tags].each do |e|
+  [:title, :brief, :content, :tags].each do |e|
     return {:success=>0, :code=>1}.to_json unless params.include? e
   end
   return {:success=>0, :code=>2}.to_json if @user.blank? or not @user.role.include? 'creator'
 
   p = @user.posts.build(
       title: params[:title],
+      brief: params[:brief],
       content: params[:content],
       tags: params[:tags]
   )
