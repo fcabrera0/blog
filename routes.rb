@@ -116,9 +116,11 @@ post '/post/edit' do
   end
 
   return {:success=>0, :code=>2}.to_json if @user.blank? or not @user.role.include? 'creator'
-  return {:success=>0, :code=>3}.to_json if @user.id.to_s != @post.user.id.to_s
 
   @post = Post.find(params[:id])
+
+  return {:success=>0, :code=>3}.to_json if @user.id.to_s != @post.user.id.to_s
+
   @post.title = params[:title]
   @post.brief = params[:brief]
   @post.tags = params[:tags]
